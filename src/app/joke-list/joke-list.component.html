@@ -18,6 +18,6 @@
 </ng-template> -->
 
 <joke-form
-  (jokeCreated)="addJoke($event)"
+  (jokeCreated)="onAddJoke($event)"
 ></joke-form>
 <joke *ngFor="let joke of jokes; let i = index" [jokes]="jokes" [joke]="joke" [num]="i"></joke>

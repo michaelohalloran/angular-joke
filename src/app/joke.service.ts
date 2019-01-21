@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import {Joke} from './joke.model';
 
 @Injectable({
@@ -11,17 +11,18 @@ export class JokeService {
       new Joke('Text 1', 'A knock knock joke', 'Show punchline', true),
       new Joke('Text 2', 'punchline 2', 'Show punchline', true),
       new Joke('Text 3', 'punchline 3', 'Show punchline', true)
-    ]
+  ]
 
+  jokesUpdated = new EventEmitter<Joke[]>();
 
-    getJokes() {
-      console.log('initial service jokes: ', this.jokes);
-      return this.jokes.slice();
-    }
+  getJokes() {
+    console.log('initial service jokes: ', this.jokes);
+    return this.jokes.slice();
+  }
 
-    getJoke(i: number) {
-      return this.jokes[i];
-    }
+  getJoke(i: number) {
+    return this.jokes[i];
+  }
 
   changeBtnText(index: number) {
     // console.log('changeBtn idx: ', index);
@@ -34,6 +35,13 @@ export class JokeService {
 
   showPunchline(joke: Joke) {
     joke.hide = !joke.hide;
+  }
+
+  addJoke(joke: Joke) {
+    console.log('hit addJoke in service');
+    this.jokes.push(joke);
+    //let other components know that jokes was updated
+    this.jokesUpdated.emit(this.jokes);
   }
 
 

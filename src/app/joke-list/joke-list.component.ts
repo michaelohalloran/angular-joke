@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JokeService } from '../joke.service';
 import { Joke } from '../joke.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'joke-list',
@@ -11,9 +12,12 @@ import { Joke } from '../joke.model';
 export class JokeListComponent implements OnInit {
 
   jokes: Joke[] = [];
+  subscription: Subscription;
 
 
-  constructor(private jokeService: JokeService) {}
+  constructor(private jokeService: JokeService) {
+    this.jokes = this.jokeService.getJokes();
+  }
 
   ngOnInit() {
     // const promise = new Promise((resolve, reject)=> {
@@ -26,15 +30,18 @@ export class JokeListComponent implements OnInit {
     // setTimeout(()=> {
     //   this.jokes = this.jokeService.getJokes();
     // }, 1000);
-    console.log('JokeList onInit');
+    // console.log('JokeList onInit');
 
-    this.jokes = this.jokeService.getJokes();
-    console.log('this.jokes in JokeList: ', this.jokes);
-
+    this.subscription = this.jokeService.jokesUpdated.subscribe(
+      (jokes: Joke[]) => {
+        this.jokes = jokes;
+      }
+    )
   }
   
-  addJoke(e) {
-    console.log('evt: ', e);
+  onAddJoke(e) {
+    // console.log('evt: ', e);
+    this.jokeService.addJoke(e);
   }
 
 
