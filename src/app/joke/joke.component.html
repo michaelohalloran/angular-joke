@@ -1,0 +1,27 @@
+<!-- <div>
+  <div class="card card-block" *ngFor="let joke of jokes; let i = index">
+    <h4 class="card-title">{{i+1}}. {{joke.setup}}</h4>
+    <p class="card-text" [hidden]="joke.hide">{{joke.punchline}}</p>
+    <button class="btn btn-primary" (click)="toggleJoke(joke, i)">
+      {{joke.btnText}}</button>
+  </div>
+</div> -->
+
+<!-- <div class="card card-block" > -->
+<!-- </div> -->
+
+<!-- <h3 *ngIf="num && joke; else jokeDisplay">No joke</h3> -->
+
+<div *ngIf="isDataLoaded; else noJoke">
+  <div class="card card-block" >
+  <h4 class="card-title">{{num+1}}. {{joke.setup}}</h4>
+  <p class="card-text" [hidden]="joke.hide">{{joke.punchline}}</p>
+  <button class="btn btn-primary" (click)="toggleJoke(joke, num)">
+    {{joke.btnText}}
+  </button>
+  </div>
+</div>
+
+<ng-template #noJoke>
+
+</ng-template>
