@@ -16,7 +16,7 @@ export class JokeService {
   jokesUpdated = new EventEmitter<Joke[]>();
 
   getJokes() {
-    console.log('initial service jokes: ', this.jokes);
+    // console.log('initial service jokes: ', this.jokes);
     return this.jokes.slice();
   }
 
@@ -38,9 +38,14 @@ export class JokeService {
   }
 
   addJoke(joke: Joke) {
-    console.log('hit addJoke in service');
-    this.jokes.push(joke);
+    // console.log('hit addJoke in service');
+    this.jokes.unshift(joke);
     //let other components know that jokes was updated
+    this.jokesUpdated.emit(this.jokes);
+  }
+
+  onDeleteJoke(index: number) {
+    this.jokes.splice(index, 1);
     this.jokesUpdated.emit(this.jokes);
   }
 

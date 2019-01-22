@@ -11,18 +11,18 @@ export class JokeFormComponent implements OnInit {
 
   @Output() jokeCreated = new EventEmitter<Joke>();
   @Input() value = '';
-  
-  setup: string = '';
-  punchline: string = '';
+
+  jokeSetup: string = '';
+  jokePunchline: string = '';
   btnText = 'Show punchline';
 
   ngOnInit() {}
 
-  addJoke() {
-    const newJoke = new Joke(this.setup, this.punchline, this.btnText);
+  createJoke() {
+    const newJoke = new Joke(this.jokeSetup, this.jokePunchline, this.btnText);
     this.jokeCreated.emit(newJoke);
-    this.setup = '';
-    this.punchline = '';
+    this.jokeSetup = '';
+    this.jokePunchline = '';
   }
 
 

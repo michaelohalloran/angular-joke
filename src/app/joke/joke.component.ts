@@ -30,5 +30,9 @@ export class JokeComponent implements OnInit {
     this.jokeService.changeBtnText(index);
   }
 
+  deleteJoke(idx: number) {
+    this.jokeService.onDeleteJoke(idx);
+  }
+
 
 }
