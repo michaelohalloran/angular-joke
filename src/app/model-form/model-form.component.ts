@@ -22,7 +22,7 @@ export class ModelFormComponent implements OnInit {
     this.lastName = new FormControl(null, Validators.required);
     this.email = new FormControl(null, [Validators.required, Validators.email, Validators.pattern("[^ @]*@[^ @]*")]);
     this.password = new FormControl(null, [Validators.required, Validators.minLength(8)]);
-    this.language = new FormControl(null, Validators.required);
+    this.language = new FormControl(null);
   }
 
   createForm() {
@@ -47,6 +47,7 @@ export class ModelFormComponent implements OnInit {
     console.log('form structure: ', this.signupForm);
     // console.log('value of signupForm: ', this.signupForm.value, this.signupForm.valid);
     this.formSubmitted = this.signupForm.valid ? true : false;
+    this.signupForm.reset();
   }
 
 }

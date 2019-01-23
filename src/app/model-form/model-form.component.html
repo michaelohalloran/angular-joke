@@ -14,10 +14,26 @@
   </fieldset>
 
 
-  <div class="form-group">
+  <div 
+    class="form-group"
+    [ngClass]="{
+      'border-success': email.valid && email.touched,
+      'border-danger': email.invalid && email.touched
+    }"
+    >
     <label>Email</label>
     <input formControlName="email" type="email" class="form-control">
-    <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched" class="help-block">Email is required</span>
+    <!-- <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched" class="help-block">Email is required</span> -->
+    <div *ngIf="email.invalid && email.touched" class="form-control-feedback">
+      <p *ngIf="email.errors.required">Email required</p>
+      <p *ngIf="email.errors.pattern">Email must contain the @ character</p>
+    </div>
+
+    <pre>Dirty? {{email.dirty}}</pre>
+    <pre>Pristine? {{email.pristine}}</pre>
+    <pre>Touched? {{email.touched}}</pre>
+    <pre>Valid? {{email.valid}}</pre>
+    <pre>Invalid? {{email.invalid}}</pre>
   </div>
   <div class="form-group">
     <label>Password</label>
@@ -30,7 +46,6 @@
       <option value=''>Please select a language</option>
       <option *ngFor="let lang of langs" [value]="lang">{{lang}}</option>
     </select> 
-    <span *ngIf="!signupForm.get('language').valid && signupForm.get('language').touched" class="help-block">Language is required</span>
   </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>
