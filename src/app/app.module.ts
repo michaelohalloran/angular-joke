@@ -6,13 +6,17 @@ import { JokeFormComponent } from './joke-form/joke-form.component';
 import { JokeListComponent } from './joke-list/joke-list.component';
 import { JokeComponent } from './joke/joke.component';
 import { JokeService } from './joke.service';
+import { CleanPipe } from './clean.pipe';
+import { ModelFormComponent } from './model-form/model-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     JokeFormComponent,
     JokeListComponent,
-    JokeComponent
+    JokeComponent,
+    CleanPipe,
+    ModelFormComponent
   ],
   imports: [
     BrowserModule

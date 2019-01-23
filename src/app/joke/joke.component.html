@@ -15,7 +15,7 @@
 <div *ngIf="isDataLoaded; else noJoke">
   <div class="card card-block" >
   <h4 class="card-title">{{num+1}}. {{joke.setup}}</h4>
-  <p class="card-text" [hidden]="joke.hide">{{joke.punchline}}</p>
+  <p class="card-text" [hidden]="joke.hide">{{joke.punchline | clean:['boo','bad','word']}}</p>
   <button class="btn btn-primary" (click)="toggleJoke(joke, num)">
     {{joke.btnText}}
   </button>
