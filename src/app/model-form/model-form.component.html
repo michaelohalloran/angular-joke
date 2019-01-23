@@ -1,3 +1,44 @@
-<p>
-  model-form works!
-</p>
+<form [formGroup]="signupForm" novalidate (ngSubmit)="onSubmit()">
+  <fieldset formGroupName="name">
+    <div class="form-group">
+      <label>First Name</label>
+      <input formControlName="firstName" type="text" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input formControlName="lastName" type="text" class="form-control">
+    </div>
+    <span *ngIf="!signupForm.get('name').valid && signupForm.get('name').touched" class="help-block">First and last name required</span>
+
+  </fieldset>
+
+
+  <div class="form-group">
+    <label>Email</label>
+    <input formControlName="email" type="email" class="form-control">
+    <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched" class="help-block">Email is required</span>
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input formControlName="password" type="password" class="form-control">
+    <span *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched" class="help-block">Password is required</span>
+  </div>
+  <div class="form-group">
+    <label>Language</label>
+    <select formControlName="language" type="text" class="form-control">
+      <option value=''>Please select a language</option>
+      <option *ngFor="let lang of langs" [value]="lang">{{lang}}</option>
+    </select> 
+    <span *ngIf="!signupForm.get('language').valid && signupForm.get('language').touched" class="help-block">Language is required</span>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<pre>{{signupForm.value | json}}</pre>
+
+<!-- <ul *ngIf="formSubmitted" class="list-group">
+  <li class="list-group-item">{{firstName | json}}  {{lastName | json}}</li>
+  <li class="list-group-item">{{email | json}}</li>
+</ul> -->
