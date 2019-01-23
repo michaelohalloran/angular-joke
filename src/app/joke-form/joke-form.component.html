@@ -1,4 +1,4 @@
-<div class="card card-block">
+<!-- <div class="card card-block">
   <h4 class="card-title">Create Joke</h4>
   <div class="form-group">
     <input 
@@ -19,4 +19,29 @@
     (input)="jokePunchline = punchline.value">
   </div>
   <button type="button" class="btn btn-primary" (click)="createJoke()">Create</button>
-</div>
+</div> -->
+
+
+<form [formGroup]="jokeForm" class="card card-block" (ngSubmit)="onSubmitJoke()">
+  <h4 class="card-title">Create Joke</h4>
+
+  <div class="form-group">
+    <input 
+      type="text"
+      placeholder="Enter the setup"
+      formControlName="setupCtrl" 
+      class="form-control">
+      <span *ngIf="!setupCtrl.valid && setupCtrl.touched" class="help-block">Setup required</span>
+  </div>
+
+  <div class="form-group">
+    <input 
+      type="text"
+      placeholder="Enter the punchline"
+      formControlName="punchlineCtrl" 
+      class="form-control">
+      <span *ngIf="!punchlineCtrl.valid && punchlineCtrl.touched" class="help-block">Punchline required</span>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Create joke</button>
+</form>

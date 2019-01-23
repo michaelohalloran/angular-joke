@@ -6,9 +6,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CleanPipe implements PipeTransform {
 
   transform(value: any, words: string[]): any {
-    return words.reduce((cleaned, next)=> {
-      return value.includes(next) ? cleaned.replace(next, ''): cleaned;
-    }, value)
+
+    if(value) {
+      return words.reduce((cleaned, next)=> {
+        return value.includes(next) ? cleaned.replace(next, ''): cleaned;
+      }, value)
+    }
   }
 
 }

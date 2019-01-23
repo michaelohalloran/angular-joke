@@ -38,7 +38,6 @@ export class JokeService {
   }
 
   addJoke(joke: Joke) {
-    // console.log('hit addJoke in service');
     this.jokes.unshift(joke);
     //let other components know that jokes was updated
     this.jokesUpdated.emit(this.jokes);
