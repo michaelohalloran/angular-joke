@@ -10,6 +10,8 @@ import { JokeService } from './joke.service';
 import { CleanPipe } from './clean.pipe';
 import { ModelFormComponent } from './model-form/model-form.component';
 import { SearchFormComponent } from './search-form/search-form.component';
+import { HttpComponent } from './http/http.component';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -19,11 +21,13 @@ import { SearchFormComponent } from './search-form/search-form.component';
     JokeComponent,
     CleanPipe,
     ModelFormComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    HttpComponent
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   providers: [JokeService],
   bootstrap: [AppComponent]

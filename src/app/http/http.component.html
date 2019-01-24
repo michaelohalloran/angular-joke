@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="m-1">
+    <button class="m-1 btn btn-primary" (click)="doGet()">GET</button>
+    <button class="m-1 btn btn-primary" (click)="doPut()">PUT</button>
+    <button class="m-1 btn btn-primary" (click)="doPost()">POST</button>
+    <button class="m-1 btn btn-primary" (click)="doDelete()">DELETE</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="m-1">
+    <button class="m-1 btn btn-secondary" (click)="doGETAsPromise()">Get as Promise</button>
+    <button class="m-1 btn btn-secondary" (click)="doGETAsPromiseError()">Error as Promise</button>
+    <button class="m-1 btn btn-secondary" (click)="doGETAsObservableError()">Error as Observable</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="m-1">
+    <button class="btn btn-danger" (click)="doGETWithHeaders()">Get with Headers</button>
+  </div>
+</div>
