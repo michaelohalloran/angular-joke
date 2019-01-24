@@ -1,0 +1,83 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <fieldset ngModelGroup="name">
+    <div class="form-group">
+      <label>First Name: </label>
+      <input 
+        type="text"
+        [(ngModel)]="model.firstName"
+        name="firstName"
+        required
+        #firstName="ngModel" 
+        class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label>Last Name: </label>
+      <input 
+        type="text"
+        [(ngModel)]="model.lastName" 
+        name="lastName"
+        required
+        #lastName="ngModel" 
+        class="form-control">
+    </div>
+  </fieldset>
+
+  <div 
+    [ngClass]="
+    {
+      'bg-success': email.valid && email.touched,
+      'bg-warning': !email.valid && email.touched
+    }"
+    class="form-group">
+    <label>Email: </label>
+    <input 
+      type="email"
+      [(ngModel)]="model.email"
+      name="email"
+      required
+      #email="ngModel"
+      pattern="[^@]*@[^@]*" 
+      class="form-control">
+
+      <div class="form-control-feedback"
+        *ngIf="email.errors  && email.touched">
+        <p *ngIf="email.errors.required">Email required</p>
+        <p *ngIf="email.errors.pattern">Email must have @ character</p>
+      </div>
+
+      <pre>Valid? {{f.form.controls.email?.valid}}</pre>
+      <pre>Dirty? {{f.form.controls.email?.dirty}}</pre>
+      <pre>Touched? {{f.form.controls.email?.touched}}</pre>
+  </div>
+
+  <div class="form-group">
+    <label>Password: </label>
+    <input 
+      type="password" 
+      [(ngModel)]="model.password" 
+      name="password"
+      required
+      #password="ngModel"
+      minlength="8"
+      class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label>Language: </label>
+    <select 
+      [(ngModel)]="model.language" 
+      name="language"
+      required
+      #language="ngModel" 
+      type="text" 
+      class="form-control">
+      <option value="">Please select a language</option>
+      <option *ngFor="let lang of langs" [value]="lang">{{lang}}</option>
+    </select>
+  </div>
+
+  <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+</form>
+
+<pre>{{f.value | json}}</pre>
