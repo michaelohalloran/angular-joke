@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { JokeFormComponent } from './joke-form/joke-form.component';
@@ -12,6 +12,8 @@ import { ModelFormComponent } from './model-form/model-form.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { HttpComponent } from './http/http.component';
 import { HttpModule } from '@angular/http';
+import { MusicSearchComponent } from './music-search/music-search.component';
+import { SearchService } from './search.service';
 
 @NgModule({
   declarations: [
@@ -22,14 +24,16 @@ import { HttpModule } from '@angular/http';
     CleanPipe,
     ModelFormComponent,
     SearchFormComponent,
-    HttpComponent
+    HttpComponent,
+    MusicSearchComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [JokeService],
+  providers: [JokeService, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
