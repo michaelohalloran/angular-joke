@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import { Http, URLSearchParams, RequestOptions, Headers } from '@angular/http';
+import 'rxjs';
 
 @Component({
   selector: 'http',
@@ -59,15 +59,52 @@ export class HttpComponent implements OnInit {
   doGETAsPromise() {
     console.log('GET as Promise');
     let url = `${this.apiRoot}/get`;
-    this.http.get(url)
+    let search = new URLSearchParams();
+    search.set('mySearch', 'queryHere');
+    this.http.get(url, {search})
       .toPromise()
       .then(res => console.log('get as promise res: ', res.json()))
   }
 
-  doGETAsPromiseError() {console.log('GET as Promise Error');}
-  doGETAsObservableError() {console.log('ObservableError');}
+  doGETAsPromiseError() {
+    console.log('GET as Promise Error');
+    let url = `${this.apiRoot}/getffg`;
+    let search = new URLSearchParams();
+    search.set('mySearch', 'queryHere');
+    this.http.get(url, {search})
+      .toPromise()
+      .then(res => console.log('get as promise res: ', res.json()))
+      .catch(err => console.error(`Error: ${err.status} ${err.statusText}`));
+  }
 
-  doGETWithHeaders() {console.log('GET with headers');}
+
+  doGETAsObservableError() {
+    console.log('ObservableError');
+    let url = `${this.apiRoot}/get`;
+    let search = new URLSearchParams();
+    search.set('mySearch', 'queryHere');
+    this.http.post(url, {search})
+      .subscribe(
+        res => console.log('get as observable res: ', res.json()),
+        err => console.log(`Error: ${err.status} ${err.statusText}`)
+      )
+  }
+
+  doGETWithHeaders() {
+    console.log('GET with headers');
+    let headers = new Headers();
+    headers.append('Authorization', btoa('username: password'));
+    let search = new URLSearchParams();
+    search.set('pineapple', 'Bromelain');
+    let opts = new RequestOptions();
+    opts.headers = headers;
+    opts.search = search;
+    let url = `${this.apiRoot}/get`;
+    this.http.get(url, opts).subscribe(
+      res => console.log('get with headers res: ', res.json()),
+      err => console.error(`Error: ${err.status} ${err.statusText}`)
+    );
+  }
 
 
 }
