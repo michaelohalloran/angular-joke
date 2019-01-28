@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormControl } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { JokeFormComponent } from './joke-form/joke-form.component';
@@ -31,7 +31,7 @@ import { SearchService } from './search.service';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
   ],
   providers: [JokeService, SearchService],
   bootstrap: [AppComponent]

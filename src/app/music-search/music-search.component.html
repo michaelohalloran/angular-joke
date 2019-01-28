@@ -4,10 +4,9 @@
       type="search" 
       class="form-control"
       placeholder="Enter search"
-      #search>
+      [formControl]="searchField">
   </div>
 
-  <button class="btn btn-primary" (click)="onSearch(search.value)">Search</button>
 </form>
 
 <hr>
@@ -17,7 +16,7 @@
 </div>
 
 <div class="container">
-  <ul *ngIf="songs && songs.length > 0" class="list-group">
+  <ul class="list-group">
       <li *ngFor="let result of results | async" class="list-group-item">
         <h4 class="card-title">{{result.trackName}}</h4>
         <h6 class="card-subtitle">{{result.time}}</h6>

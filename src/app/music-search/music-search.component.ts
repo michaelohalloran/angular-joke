@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../search.service';
 import { Song } from '../song.model';
 import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
-
 
 @Component({
   selector: 'music-search',
@@ -12,7 +12,7 @@ import { FormControl } from '@angular/forms';
 })
 export class MusicSearchComponent implements OnInit {
 
-  songs: any[] = [];
+  // songs: any[] = [];
   private loading: boolean = false;
   private results: Observable<Song[]>;
   private searchField: FormControl;
@@ -21,19 +21,26 @@ export class MusicSearchComponent implements OnInit {
 
   ngOnInit() {
     this.searchField = new FormControl();
-    this.getSongs();
-    console.log('ran onInit getSongs');
-    this.itunes.songsChanged.subscribe(
-      songs => {
-        this.songs = songs;
-        console.log('this.songs: ', this.songs);
-      }
-    );
+    this.results = this.searchField.valueChanges
+      .pipe(debounceTime(500))
+      .pipe(distinctUntilChanged())
+      .pipe(tap(()=> this.loading = true))
+      .pipe(switchMap(term => this.itunes.search(term)))
+      .pipe(tap(()=> this.loading = false))
+    
+    // this.getSongs();
+    // console.log('ran onInit getSongs');
+    // this.itunes.songsChanged.subscribe(
+    //   songs => {
+    //     this.songs = songs;
+    //     console.log('this.songs: ', this.songs);
+    //   }
+    // );
   }
 
-  getSongs() {
-    this.songs = this.itunes.results;
-  }
+  // getSongs() {
+  //   this.songs = this.itunes.results;
+  // }
 
   // onSearch(term: string) {
   //   console.log(`You searched for ${term}`);
