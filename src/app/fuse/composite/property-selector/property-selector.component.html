@@ -1,0 +1,9 @@
+<!-- <div class="flex-item-row" *ngFor="let key of keys" (click)="onSelectKey(key)">
+  <div  class="flex-item-sub">{{key}}</div>
+  <div class="flex-item-sub" (click)="onSetComposite(feature, key)" *ngFor="let feature of features" [ngStyle]="{backgroundColor: feature.bgColor2}">{{feature[key]}}</div>
+  <div class="flex-item-sub" [ngStyle]="{backgroundColor: selectionColor}">{{selection}}, key: {{selectedKey}}</div>
+</div> -->
+
+<div *ngIf="selectedKey === rowKey">
+  {{selection}}, key: {{selectedKey}}
+</div>

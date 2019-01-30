@@ -33,7 +33,7 @@
   <div class="item" *ngFor="let feature of features">Lng: {{feature.lng}}</div>
 </div> -->
 
-<div class="flex-container">
+<!-- <div class="flex-container">
   <div class="flex-item-column">
     <div class="flex-item">&nbsp;</div>
     <div class="flex-item" *ngFor="let key of keys">{{key}}</div>
@@ -50,4 +50,35 @@
     <div class="flex-item">{{selectedLat}}</div>
     <div class="flex-item">{{selectedLng}}</div>
   </div>
+</div> -->
+
+<div class="flex-container">
+    <div class="flex-item-row">
+        <div class="flex-item-sub">&nbsp;</div>
+        <div class="flex-item-sub" *ngFor="let feature of features">Feature {{feature.id}}</div>
+        <div class="flex-item-sub">Composite</div>
+    </div>
+
+    <!-- <property-selector class="property-container" [features]="features" [keys]="keys"></property-selector> -->
+
+    <div class="flex-item-row" (click)="onSelectKey(key)" *ngFor="let key of keys; let i = index">
+      <div class="flex-item-sub">{{key}}</div>
+      <div class="flex-item-sub" (click)="onSetComposite(feature, key, i2)" *ngFor="let feature of features; let i2 = index" [ngStyle]="{backgroundColor: feature.bgColor2}">{{feature[key]}}</div>
+      <!-- <div class="flex-item-sub" [ngStyle]="{backgroundColor: selectionColor}">{{selection}}, key: {{selectedKey}}</div> -->
+      <property-selector
+        class="flex-item-sub"
+        [ngStyle]="{backgroundColor: (features[i].selected) ? features[i].bgColor2 : 'green'}"
+        (click)="setBgColor(rowKey)" 
+        [rowKey]="key" 
+        [selected]="features[i].selected"
+        [features]="features"
+        [selectedKey]="selectedKey"
+        [selection]="selection"
+        [selectionColor]="selectionColor"
+        [rowId]="i">
+      </property-selector>
+    </div>
+
+    <!-- [ngStyle]="{backgroundColor: (features[i].selected) ? selectionColor : 'green'}"  -->
+
 </div>

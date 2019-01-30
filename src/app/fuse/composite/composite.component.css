@@ -25,21 +25,43 @@
     display: flex;
     /* flex-wrap: wrap; */
     height: 500px;
+    flex-direction: column;
+    flex-basis: 19%;
+    border: 1px solid black;
 }
 
 .flex-item {
     border: 1px solid black;
+    /* height: 25%; */
+}
+
+.flex-item-row {
+    display: flex;
+    border: 1px solid black;
+    background-color: lightblue;
     height: 25%;
 }
+
+
+.flex-item-sub {
+    height: 100%;
+    border: 1px solid black;
+    width: 20%;
+    word-break: break-all;
+}
+
+/* .property-container {
+    height: 80%;
+} */
 
 .flex-item-column:nth-of-type(even) {
     background-color: lightsalmon;
 }
 
-.flex-item-column {
+/* .flex-item-column {
     display: flex;
     flex-direction: column;
     flex-basis: 19%;
     border: 1px solid black;
     height: 100%;
-}
+} */

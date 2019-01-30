@@ -15,6 +15,8 @@ import { HttpModule } from '@angular/http';
 import { MusicSearchComponent } from './music-search/music-search.component';
 import { SearchService } from './search.service';
 import { CompositeComponent } from './fuse/composite/composite.component';
+import { PropertySelectorComponent } from './fuse/composite/property-selector/property-selector.component';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { CompositeComponent } from './fuse/composite/composite.component';
     SearchFormComponent,
     HttpComponent,
     MusicSearchComponent,
-    CompositeComponent
+    CompositeComponent,
+    PropertySelectorComponent
   ],
   imports: [
     BrowserModule,
