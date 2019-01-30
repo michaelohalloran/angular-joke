@@ -14,6 +14,7 @@ import { HttpComponent } from './http/http.component';
 import { HttpModule } from '@angular/http';
 import { MusicSearchComponent } from './music-search/music-search.component';
 import { SearchService } from './search.service';
+import { CompositeComponent } from './fuse/composite/composite.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SearchService } from './search.service';
     ModelFormComponent,
     SearchFormComponent,
     HttpComponent,
-    MusicSearchComponent
+    MusicSearchComponent,
+    CompositeComponent
   ],
   imports: [
     BrowserModule,
