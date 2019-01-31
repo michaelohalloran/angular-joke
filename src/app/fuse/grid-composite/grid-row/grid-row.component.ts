@@ -18,8 +18,4 @@ export class GridRowComponent implements OnInit {
     console.log('rowName: ', this.rowName);
   }
 
-  showFeature() {
-    console.log('hit showFeature');
-  }
-
 }
