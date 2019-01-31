@@ -1,57 +1,3 @@
-<!-- <div class="container">
-  <h2>Composite</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>&nbsp;</th>
-        <th>Feature</th>
-        <th>Q1</th>
-        <th>Q2</th>
-        <th>Q3</th>
-        <th>Fuse</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let feature of features; let i = index">
-        <th *ngFor="let key of keys">{{key}}</th>
-        <th>{{feature.lat}}</th>
-        <th>{{feature.lng}}</th>
-      </tr>
-    </tbody>
-  </table>
-</div> -->
-
-<!-- <div class="grid-container"> -->
-  <!-- <div class="item item1">1</div>
-  <div class="item item2">2</div>
-  <div class="item item3">3</div>
-  <div class="item item4">4</div> -->
-  <!-- <div class="item">&nbsp;</div>
-  <div class="item" *ngFor="let feature of features">Feature {{feature.id}}</div>
-  <div class="item">Composite</div>
-  <div class="item" *ngFor="let feature of features">Lat: {{feature.lat}}</div>
-  <div class="item" *ngFor="let feature of features">Lng: {{feature.lng}}</div>
-</div> -->
-
-<!-- <div class="flex-container">
-  <div class="flex-item-column">
-    <div class="flex-item">&nbsp;</div>
-    <div class="flex-item" *ngFor="let key of keys">{{key}}</div>
-  </div>
-  <div class="flex-item-column" [ngStyle]="{backgroundColor: feature.bgColor}" *ngFor="let feature of features">
-    <div class="flex-item">Feature {{feature.id}}</div>
-    <div class="flex-item">{{feature.id}}</div>
-    <div class="flex-item" (click)="onSelectFeature($event, feature, feature.lat)">{{feature.lat}}</div>
-    <div class="flex-item">{{feature.lng}}</div>
-  </div>
-  <div class="flex-item-column" [ngStyle]="{backgroundColor: getCompositeBgColor()}">
-    <div class="flex-item">Composite</div>
-    <div class="flex-item">{{selectedId}}</div>
-    <div class="flex-item">{{selectedLat}}</div>
-    <div class="flex-item">{{selectedLng}}</div>
-  </div>
-</div> -->
-
 <div class="flex-container">
     <div class="flex-item-row">
         <div class="flex-item-sub">&nbsp;</div>
@@ -59,22 +5,33 @@
         <div class="flex-item-sub">Composite</div>
     </div>
 
-    <div class="flex-item-row" (click)="onSelectKey(key)" *ngFor="let key of keys; let i = index">
+    <div class="flex-item-row" (click)="onSelectKey($event, key)" *ngFor="let key of keys; let i = index">
       <div class="flex-item-sub">{{key}}</div>
-      <div class="flex-item-sub" (click)="onSetComposite(feature, key, i2)" *ngFor="let feature of features; let i2 = index" [ngStyle]="{backgroundColor: feature.bgColor2}">{{feature[key]}}</div>
+      <div 
+        class="flex-item-sub" 
+        (click)="onSetComposite(feature, key, i2, $event)" 
+        *ngFor="let feature of features; let i2 = index" 
+        [ngStyle]="{backgroundColor: feature.bgColor}"
+      >
+        {{feature[key]}}
+      </div>
       <property-selector
         class="flex-item-sub"
-        (click)="getInfo(i, features[i])"
         [rowKey]="key" 
         [selected]="features[i].selected"
         [features]="features"
         [selectedKey]="selectedKey"
-        [selection]="selection"
+        [selectedCell]="selection"
         [selectionColor]="selectionColor"
         [rowId]="i"
+        [options]="options"
         (selectedStatus)="logStatus($event)">
       </property-selector>
 
     </div>
   
 </div>
+
+<pre>selectedKey: {{selectedKey}}</pre>
+<pre>selection: {{selection}}</pre>
+<pre>options: {{options | json}}</pre>

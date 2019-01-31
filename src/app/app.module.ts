@@ -16,6 +16,9 @@ import { MusicSearchComponent } from './music-search/music-search.component';
 import { SearchService } from './search.service';
 import { CompositeComponent } from './fuse/composite/composite.component';
 import { PropertySelectorComponent } from './fuse/composite/property-selector/property-selector.component';
+import { GridCompositeComponent } from './fuse/grid-composite/grid-composite.component';
+import { GridRowComponent } from './fuse/grid-composite/grid-row/grid-row.component';
+import { GridColumnComponent } from './fuse/grid-composite/grid-column/grid-column.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { PropertySelectorComponent } from './fuse/composite/property-selector/pr
     HttpComponent,
     MusicSearchComponent,
     CompositeComponent,
-    PropertySelectorComponent
+    PropertySelectorComponent,
+    GridCompositeComponent,
+    GridRowComponent,
+    GridColumnComponent
   ],
   imports: [
     BrowserModule,

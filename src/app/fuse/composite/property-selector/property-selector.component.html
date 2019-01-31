@@ -1,9 +1,21 @@
 <!-- <div class="flex-item-row" *ngFor="let key of keys" (click)="onSelectKey(key)">
   <div  class="flex-item-sub">{{key}}</div>
-  <div class="flex-item-sub" (click)="onSetComposite(feature, key)" *ngFor="let feature of features" [ngStyle]="{backgroundColor: feature.bgColor2}">{{feature[key]}}</div>
+  <div class="flex-item-sub" (click)="onSetComposite(feature, key)" *ngFor="let feature of features" [ngStyle]="{backgroundColor: feature.2}">{{feature[key]}}</div>
   <div class="flex-item-sub" [ngStyle]="{backgroundColor: selectionColor}">{{selection}}, key: {{selectedKey}}</div>
 </div> -->
 
-<div *ngIf="selectedKey === rowKey" [ngStyle]="{backgroundColor: (selectedKey===rowKey) ? selectionColor: 'green'}" (click)="updateStatus()">
-  {{selection}}
+<div 
+  [ngStyle]="{backgroundColor: (selectedKey===rowKey) ? selectionColor: 'lightblue'}" 
+  (click)="updateStatus()"
+>
+  {{selectedCell}}
 </div>
+<!-- *ngIf="selectedKey === rowKey; else unselected"  -->
+
+
+<ng-template #unselected>
+  <!-- <div [ngStyle]="{backgroundColor: lastColor}"> -->
+  <div>
+    {{setDisplay()}}
+  </div>
+</ng-template>
