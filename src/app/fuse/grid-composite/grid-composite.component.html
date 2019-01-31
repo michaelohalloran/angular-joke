@@ -1,0 +1,25 @@
+<div class="wrapper">
+  <div class="grid-cell">Key</div>
+  <!-- this could be wrapped <div class="grid-row" *ngFor= etc.> -->
+  <div class="grid-cell" *ngFor="let feature of features">Feature {{feature.id}}</div>
+  <div class="grid-cell">Composite</div>
+
+  <grid-row 
+    *ngFor="let feature of features; let i = index"
+    (click)="toggleSelected(i)"
+    [ngStyle]="{backgroundColor: feature.color}"
+    [rowName]="getRowName(i)"
+    [feature]="feature"
+  >
+  </grid-row>
+  <!-- <div class="grid-cell"
+    [ngStyle]="{backgroundColor: feature.color}"
+    (click)="toggleSelected(i)"
+  >
+    {{feature.id}}. Lat: {{feature.lat}}, Lng:{{feature.lat}}, selected: {{feature.selected}}
+  </div> -->
+
+</div>
+
+<pre>Keys: {{keys}}</pre>
+<pre>Features: {{features | json}}</pre>
