@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'property-selector',
@@ -15,6 +15,7 @@ export class PropertySelectorComponent implements OnInit {
   @Input() keys: any[] = [];
   @Input() rowId: number;
   @Input() rowKey: string;
+  @Output() selectedStatus: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
@@ -27,6 +28,11 @@ export class PropertySelectorComponent implements OnInit {
     console.log('rowKey: ', this.rowKey);
   }
 
+  updateStatus() {
+    // console.log('updatedStatus rowKey: ', rowKey);
+    console.log('this.selected in property-selector: ', this.selected);
+    this.selectedStatus.emit('hello');
+  }
   
 
 }

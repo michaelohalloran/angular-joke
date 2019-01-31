@@ -18,6 +18,7 @@ export class CompositeComponent implements OnInit {
   private selectedKey: string = '';
   private selection: any;
   private selectionColor: string;
+  @Input() selected: any;
 
 
   constructor() { }
@@ -77,8 +78,18 @@ export class CompositeComponent implements OnInit {
     }
   }
 
-    setBgColor(rowKey: any) {
-      console.log('hit bgColor', rowKey);
-    }
+  getInfo(idx: number, feature: any) {
+    console.log('getInfo idx: ', idx, 'feature: ', feature);
+    console.log('selected status: ', this.selected);
+  }
+
+  logStatus(evt: string) {
+    console.log('status event: ', evt);
+  }
+
+  setColor() {
+    let color = (this.selectedKey) ? this.selectionColor: 'white';
+    return color;
+  }
 
 }
