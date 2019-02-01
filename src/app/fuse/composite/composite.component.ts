@@ -69,7 +69,6 @@ export class CompositeComponent implements OnInit, OnDestroy {
     }
   }
 
-
   onStoreComposite() {
     //take current composite obj, push into stored array
     this.fuserService.saveComposite(this.options);

@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <button (click)="onStoreComposite()">Save</button>
+  <button [disabled]="!options.length" (click)="onStoreComposite()">Save</button>
 
 <li >selectedKey: {{selectedKey}}</li>
 <li>selection: {{selectedCell}}</li>
