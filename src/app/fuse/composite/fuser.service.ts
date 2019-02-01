@@ -14,6 +14,7 @@ export class FuserService {
 
   private keys: string[] = [];
   private options: any[] = [];
+  private storedComposites: any[] = [];
   optionsChanged = new Subject<any[]>();
 
   constructor() { }
@@ -48,6 +49,21 @@ export class FuserService {
       let replaceIdx = this.options.indexOf(itemToReplace);
       this.options[replaceIdx] = newOpt;
     }
+    this.optionsChanged.next(this.options);
+  }
+
+  getSavedComposites() {
+    return this.storedComposites;
+  }
+
+  resetOptions() {
+    this.options = [];
+  }
+
+  saveComposite(arr: any[]) {
+    this.storedComposites.unshift(arr);
+    //clear options after each, so it's not overwritten
+    this.resetOptions();
     this.optionsChanged.next(this.options);
   }
 

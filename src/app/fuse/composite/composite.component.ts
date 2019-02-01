@@ -16,6 +16,7 @@ export class CompositeComponent implements OnInit, OnDestroy {
   private selectionColor: string;
   private options: any[] = [];
   private optionsSubscription: any;
+  private savedComps: any[];
 
   constructor(private fuserService: FuserService) { }
 
@@ -23,6 +24,7 @@ export class CompositeComponent implements OnInit, OnDestroy {
 
     this.features = this.fuserService.getFeatures();
     this.options = this.fuserService.getOptions();
+    this.savedComps = this.fuserService.getSavedComposites();
     this.optionsSubscription = this.fuserService.optionsChanged.subscribe(
       (options: any[]) => this.options = options
     )
@@ -68,10 +70,9 @@ export class CompositeComponent implements OnInit, OnDestroy {
   }
 
 
-  storeComposite() {
-    console.log('hit store function');
+  onStoreComposite() {
     //take current composite obj, push into stored array
-    // this.storedObjs.unshift();
+    this.fuserService.saveComposite(this.options);
   }
 
   ngOnDestroy() {

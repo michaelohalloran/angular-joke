@@ -25,8 +25,9 @@
     </div>
   </div>
 
-  <button (click)="storeComposite()">Save</button>
+  <button (click)="onStoreComposite()">Save</button>
 
 <li >selectedKey: {{selectedKey}}</li>
 <li>selection: {{selectedCell}}</li>
 <pre [ngStyle]="{backgroundColor: 'darkgoldenrod'}">options: {{options | json}}</pre>
+<pre [ngStyle]="{backgroundColor: 'darkgoldenrod'}">saved: {{savedComps | json}}</pre>
