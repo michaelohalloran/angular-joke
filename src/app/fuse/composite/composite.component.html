@@ -1,32 +1,24 @@
 <div class="flex-container">
-    <div class="flex-item-row">
-        <div class="flex-item-sub">&nbsp;</div>
-        <div class="flex-item-sub" *ngFor="let feature of features">Feature {{feature.id}}</div>
-        <div class="flex-item-sub">Composite</div>
+    <div class="flex-row">
+        <div class="flex-cell">&nbsp;</div>
+        <div class="flex-cell" *ngFor="let feature of features">Feature {{feature.id}}</div>
+        <div class="flex-cell">Composite</div>
     </div>
 
-    <div class="flex-item-row" (click)="onSelectKey($event, key)" *ngFor="let key of keys; let i = index">
-      <div class="flex-item-sub">{{key}}</div>
+    <div class="flex-row" (click)="onSelectKey(key)" *ngFor="let key of rowKeys; let i = index">
+      <div class="flex-cell">{{key}}</div>
       <div 
-        class="flex-item-sub" 
-        (click)="onSetComposite(feature, key, i2, $event)" 
+        class="flex-cell" 
         *ngFor="let feature of features; let i2 = index" 
+        (click)="onSetComposite(feature, key, i2)" 
         [ngStyle]="{backgroundColor: feature.bgColor}"
       >
         {{feature[key]}}
       </div>
       <property-selector
-        class="flex-item-sub"
-        [rowKey]="key" 
-        [selected]="features[i].selected"
-        [features]="features"
-        [selectedKey]="selectedKey"
-        [selectedCell]="selection"
-        [selectionColor]="selectionColor"
-        [displayVal]="show(key)"
+        class="flex-cell"
+        [displayVal]="setDisplay(key)"
         [ngStyle]="{backgroundColor: setColor(key)}"
-        [rowId]="i"
-        [options]="options"
       >
       </property-selector>
 
@@ -35,7 +27,6 @@
 
   <button (click)="storeComposite()">Save</button>
 
-<pre>selectedKey: {{selectedKey}}</pre>
-<pre>selection: {{selection}}</pre>
-<pre>options: {{options | json}}</pre>
-<!-- <pre>Stored: {{storedObjs | json}}</pre> -->
+<li >selectedKey: {{selectedKey}}</li>
+<li>selection: {{selectedCell}}</li>
+<pre [ngStyle]="{backgroundColor: 'darkgoldenrod'}">options: {{options | json}}</pre>

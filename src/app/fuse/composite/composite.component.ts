@@ -9,80 +9,55 @@ import { FuserService } from './fuser.service';
 export class CompositeComponent implements OnInit, OnDestroy {
 
   private features: any[] = [];
-  private keys: any[] = [];
+  private rowKeys: string[] = [];
 
   private selectedKey: string = '';
-  private selection: any;
+  private selectedCell: any;
   private selectionColor: string;
-  @Input() selected: any;
   private options: any[] = [];
   private optionsSubscription: any;
-  private storedObjs: any[] = [];
-  private displayVal: string = '';
-
 
   constructor(private fuserService: FuserService) { }
-
-  createTableRowHeaders(arr) {
-    this.keys = Object.keys(arr[0]).slice(0,3);
-  }
 
   ngOnInit() {
 
     this.features = this.fuserService.getFeatures();
     this.options = this.fuserService.getOptions();
     this.optionsSubscription = this.fuserService.optionsChanged.subscribe(
-      (options: any[]) => console.log('options changed: ', options)
+      (options: any[]) => this.options = options
     )
-
-    this.createTableRowHeaders(this.features);
+    this.rowKeys = this.fuserService.makeRowKeys();
   }
 
-  // onSelectFeature(evt, feature: Object, lat: string) {
-  //   this.selectedFeature = feature;
-  //   this.selectedLat = lat;
-  //   console.log('hit onSelect', this.selectedFeature);
-  //   console.log('evt parent', evt);
-  // }
-
-  // getCompositeBgColor() {
-  //   this.selectedBgColor = this.selectedFeature ? this.selectedFeature['bgColor']: 'white';
-  //   return this.selectedBgColor;
-  // }
-
-  onSelectKey(evt, key: string) {
-    // console.log('evt: ', evt);
-    // console.log('evt target: ', evt.target, 'currentTarget: ', evt.currentTarget);
+  onSelectKey(key: string) {
     this.selectedKey = key;
-    // console.log('selectedKey: ', this.selectedKey);
   }
 
-  onSetComposite(feature: string, key: string, idx: number, evt) {
-    this.onSelectKey(evt, key);
+  onSetComposite(feature: string, key: string, idx: number) {
+    this.onSelectKey(key);
     this.selectionColor = feature['bgColor'];
-    this.selection = feature[this.selectedKey];
+    this.selectedCell = feature[this.selectedKey];
     this.toggleSelected(this.features, idx);
-    //push selection object into options array, with value and key
-    let newestOption = {val: this.selection, row: this.selectedKey, color: this.selectionColor};
+    //push selectedCell object into options array, with value and key
+    let newestOption = {val: this.selectedCell, row: this.selectedKey, color: this.selectionColor};
     this.fuserService.updateOptions(newestOption);
-    // console.log('###################');
-    // console.log('in onSet, selectedKey: ', this.selectedKey);
-    // console.log('onSet color: ', this.selectionColor);
-    // console.log('onSet feature: ', feature);
-    // console.log('idx2: ', idx);
-    // console.log('onSet selection: ', this.selection);
-    // console.log('features after selected status change: ', this.features);
-    // console.log('options: ', this.options);
-    // console.log('###################');
   }
 
-  show(key: string) {
+  findOption(array: any[], key: string, property: string, alternative:any) {
     //find the option that matches the current rowKey
-    let opt = this.options.find(opt => opt.row === key);
+    let found = array.find(option => option.row === key);
+    return found ? found[property] : alternative;
+  }
+
+  setDisplay(key: string) {
     //check that options exists first:
-    return opt ? opt.val : null;
+    return this.findOption(this.options, key, 'val', null);
   }
   
+  setColor(key: string) {
+    return this.findOption(this.options, key, 'color', '#00A591');
+  }
+
   toggleSelected(arr: any[], idx: number) {
     //change the selected feature's selected prop to true, but all others to false (i.e., toggle)
     for(let i = 0; i < arr.length; i++) {
@@ -92,10 +67,6 @@ export class CompositeComponent implements OnInit, OnDestroy {
     }
   }
 
-  setColor(key: string) {
-    let opt = this.options.find(opt => opt.row === key);
-    return opt ? opt.color : 'lightblue';
-  }
 
   storeComposite() {
     console.log('hit store function');

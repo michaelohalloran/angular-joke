@@ -12,8 +12,8 @@ export class FuserService {
     {id: 3, lat: 97, lng: 'west', selected: false, bgColor:'#ff7b25',},
   ];
 
+  private keys: string[] = [];
   private options: any[] = [];
-  private displayVal: string = '';
   optionsChanged = new Subject<any[]>();
 
   constructor() { }
@@ -26,6 +26,11 @@ export class FuserService {
   getOptions() {
     //don't slice or it won't update on the page
     return this.options;
+  }
+
+  makeRowKeys() {
+    this.keys = Object.keys(this.features[0]).slice(0,3);
+    return this.keys;
   }
 
   updateOptions(newOpt: any) {
@@ -44,25 +49,7 @@ export class FuserService {
       this.options[replaceIdx] = newOpt;
     }
     this.optionsChanged.next(this.options);
-    console.log('currentRows: ', currentRows);
-    console.log('options now: ', this.options);
   }
 
-  setDisplayVal(rowKey: string) {
-    // console.log('received key: ', rowKey);
-    //loop over options, if this.rowKey matches this.options[i].row, output that value
-    for (let opt of this.options) {
-      // console.log('setDisplay opt: ', opt);
-      if (rowKey === opt.row) {
-        this.displayVal = opt.val;
-      } else {
-        //otherwise show last val in options that matches
-        this.displayVal = 'text';
-      }
-    }
-    return this.displayVal;
-  }
-
-  //loop over options, pass in each rowKey and set display based on that
 
 }
