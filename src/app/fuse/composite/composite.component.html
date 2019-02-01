@@ -24,9 +24,10 @@
         [selectedCell]="selection"
         [selectionColor]="selectionColor"
         [displayVal]="show(key)"
+        [ngStyle]="{backgroundColor: setColor(key)}"
         [rowId]="i"
         [options]="options"
-        (selectedStatus)="logStatus($event)">
+      >
       </property-selector>
 
     </div>

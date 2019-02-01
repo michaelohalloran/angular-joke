@@ -10,11 +10,6 @@ export class CompositeComponent implements OnInit, OnDestroy {
 
   private features: any[] = [];
   private keys: any[] = [];
-  private selectedFeature: Object;
-  private selectedId: number;
-  private selectedLat: string = '';
-  private selectedLng: string = '';
-  private selectedBgColor: string = '';
 
   private selectedKey: string = '';
   private selection: any;
@@ -82,12 +77,10 @@ export class CompositeComponent implements OnInit, OnDestroy {
   }
 
   show(key: string) {
-    // return this.fuserService.getOptions()[key];
-    console.log('show fired: ', this.options.find(opt => opt.row === key));
+    //find the option that matches the current rowKey
     let opt = this.options.find(opt => opt.row === key);
+    //check that options exists first:
     return opt ? opt.val : null;
-    // return this.options[key];
-    // return this.fuserService.setDisplayVal(key);
   }
   
   toggleSelected(arr: any[], idx: number) {
@@ -99,18 +92,9 @@ export class CompositeComponent implements OnInit, OnDestroy {
     }
   }
 
-  // getInfo(idx: number, feature: any) {
-  //   console.log('getInfo idx: ', idx, 'feature: ', feature);
-  //   console.log('selected status: ', this.selected);
-  // }
-
-  logStatus(evt: string) {
-    console.log('status event: ', evt);
-  }
-
-  setColor() {
-    let color = (this.selectedKey) ? this.selectionColor: 'white';
-    return color;
+  setColor(key: string) {
+    let opt = this.options.find(opt => opt.row === key);
+    return opt ? opt.color : 'lightblue';
   }
 
   storeComposite() {

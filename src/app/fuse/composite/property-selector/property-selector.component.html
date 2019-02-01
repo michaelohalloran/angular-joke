@@ -4,8 +4,8 @@
   <div class="flex-item-sub" [ngStyle]="{backgroundColor: selectionColor}">{{selection}}, key: {{selectedKey}}</div>
 </div> -->
 
+<!-- [ngStyle]="{backgroundColor: (selectedKey===rowKey) ? selectionColor: 'lightblue'}"  -->
 <div 
-  [ngStyle]="{backgroundColor: (selectedKey===rowKey) ? selectionColor: 'lightblue'}" 
   (click)="updateStatus()"
 >
   {{displayVal}}
