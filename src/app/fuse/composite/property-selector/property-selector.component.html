@@ -8,8 +8,10 @@
   [ngStyle]="{backgroundColor: (selectedKey===rowKey) ? selectionColor: 'lightblue'}" 
   (click)="updateStatus()"
 >
-  {{selectedCell}}
+  {{displayVal}}
+  <!-- {{setDisplay()}} -->
 </div>
+<!-- <pre>selector options: {{options | json}}</pre> -->
 <!-- *ngIf="selectedKey === rowKey; else unselected"  -->
 
 

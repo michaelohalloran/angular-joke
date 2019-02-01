@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { FuserService } from '../fuser.service';
 
 @Component({
   selector: 'property-selector',
@@ -17,10 +18,11 @@ export class PropertySelectorComponent implements OnInit {
   @Input() rowKey: string;
   @Output() selectedStatus: EventEmitter<string> = new EventEmitter<string>();
   @Input() options: any[];
+  @Input() displayVal: string = '';
   lastVal: string = '';
   lastColor: string = '';
 
-  constructor() { }
+  constructor(private fuserService: FuserService) { }
 
   ngOnInit() {
     // console.log('*****************************************');
@@ -45,11 +47,17 @@ export class PropertySelectorComponent implements OnInit {
 
   setDisplay() {
     //loop over options, if this.rowKey matches this.options[i].row, output that value
-    for (let opt of this.options) {
-      if (this.rowKey === opt.row) {
-        this.lastVal = opt;
-      }
-    }
+    // for (let opt of this.options) {
+    //   if (this.rowKey === opt.row) {
+    //     // this.lastVal = opt;
+    //     this.lastVal = this.fuserService.setDisplayVal(this.rowKey);
+    //   }
+    // }
+
+
+
+    // this.lastVal = this.fuserService.setDisplayVal(this.rowKey);
+    // return this.lastVal;
   }
   
 

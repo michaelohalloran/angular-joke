@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FuserService } from './fuser.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { FuserService } from './fuser.service';
   templateUrl: './composite.component.html',
   styleUrls: ['./composite.component.css']
 })
-export class CompositeComponent implements OnInit {
+export class CompositeComponent implements OnInit, OnDestroy {
 
   private features: any[] = [];
   private keys: any[] = [];
@@ -21,6 +21,7 @@ export class CompositeComponent implements OnInit {
   private selectionColor: string;
   @Input() selected: any;
   private options: any[] = [];
+  private optionsSubscription: any;
   private storedObjs: any[] = [];
   private displayVal: string = '';
 
@@ -35,6 +36,9 @@ export class CompositeComponent implements OnInit {
 
     this.features = this.fuserService.getFeatures();
     this.options = this.fuserService.getOptions();
+    this.optionsSubscription = this.fuserService.optionsChanged.subscribe(
+      (options: any[]) => console.log('options changed: ', options)
+    )
 
     this.createTableRowHeaders(this.features);
   }
@@ -57,25 +61,6 @@ export class CompositeComponent implements OnInit {
     this.selectedKey = key;
     // console.log('selectedKey: ', this.selectedKey);
   }
-  
-  // updateOptions(newOpt: any) {
-  //   //collect current row vals, check if our newOpt's row val is there
-  //   let currentRows = this.options.reduce((acc, next)=> {
-  //     acc.push(next.row);
-  //     return acc;
-  //   }, []);
-  //   //only push to array if nothing else of same row type is there
-  //   if(!currentRows.includes(newOpt.row)) {
-  //     this.options.unshift(newOpt);
-  //   } else {
-  //     //if it is there, replace it with what we are about to unshift
-  //     let itemToReplace = this.options.find(opt => opt.row === newOpt.row);
-  //     let replaceIdx = this.options.indexOf(itemToReplace);
-  //     this.options[replaceIdx] = newOpt;
-  //   }
-  //   console.log('currentRows: ', currentRows);
-  //   console.log('options now: ', this.options);
-  // }
 
   onSetComposite(feature: string, key: string, idx: number, evt) {
     this.onSelectKey(evt, key);
@@ -96,6 +81,14 @@ export class CompositeComponent implements OnInit {
     // console.log('###################');
   }
 
+  show(key: string) {
+    // return this.fuserService.getOptions()[key];
+    console.log('show fired: ', this.options.find(opt => opt.row === key));
+    let opt = this.options.find(opt => opt.row === key);
+    return opt ? opt.val : null;
+    // return this.options[key];
+    // return this.fuserService.setDisplayVal(key);
+  }
   
   toggleSelected(arr: any[], idx: number) {
     //change the selected feature's selected prop to true, but all others to false (i.e., toggle)
@@ -124,6 +117,10 @@ export class CompositeComponent implements OnInit {
     console.log('hit store function');
     //take current composite obj, push into stored array
     // this.storedObjs.unshift();
+  }
+
+  ngOnDestroy() {
+    this.optionsSubscription.unsubscribe();
   }
 
 }
