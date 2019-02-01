@@ -44,13 +44,11 @@ export class PropertySelectorComponent implements OnInit {
   // }
 
   setDisplay() {
-    if(this.options) {
-      this.lastVal = this.options.filter(option => {
-        option.row === this.rowKey;
-      })[0].val;
-      return this.lastVal;
-    } else {
-      return this.selectedCell;
+    //loop over options, if this.rowKey matches this.options[i].row, output that value
+    for (let opt of this.options) {
+      if (this.rowKey === opt.row) {
+        this.lastVal = opt;
+      }
     }
   }
   
